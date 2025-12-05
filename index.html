@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>くずは周辺ガチ推しスポット完全版</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&family=Yusei+Magic&display=swap');
+
+  :root {
+    --bg: #F0F4F8;
+    --text: #2D3436;
+    --card-bg: #FFFFFF;
+    
+    /* カテゴリカラー定義 */
+    --c-super: #00B894; /* スーパー：新鮮な緑 */
+    --c-shop: #FDCB6E;  /* 買い物：明るい黄色 */
+    --c-world: #E17055; /* 世界：スパイシーな赤 */
+    --c-rest: #FF7675;  /* レストラン：食欲の赤 */
+    --c-pan: #fdcb6e;   /* パン：小麦色 */
+    --c-cafe: #8D6E63;  /* カフェ：コーヒー色 */
+    --c-sweet: #FF80AB; /* スイーツ：可愛いピンク */
+    --c-sushi: #0984e3; /* 寿司：海の青 */
+    --c-meat: #D63031;  /* 肉：肉の赤 */
+    --c-heal: #6C5CE7;  /* 癒し：リラックス紫 */
+    --c-culture: #636e72;/* 文化：渋いグレー */
+  }
+
+  body {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    background-image: radial-gradient(#dfe6e9 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  header {
+    text-align: center;
+    padding: 50px 20px;
+    background: #fff;
+    border-bottom: 4px solid var(--text);
+    margin-bottom: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+
+  h1 {
+    font-family: 'Yusei Magic', sans-serif;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    margin: 0;
+    color: #e84393;
+    text-shadow: 2px 2px 0px var(--text);
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    color: #666;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  section {
+    max-width: 1100px;
+    margin: 0 auto 60px auto;
+    padding: 0 20px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px dashed #cbd5e0;
+  }
+
+  .section-emoji {
+    font-size: 2.5rem;
+    margin-right: 15px;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text);
+  }
+
+  .section-desc {
+    font-size: 0.9rem;
+    color: #777;
+    margin-left: 10px;
+    font-weight: normal;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 2px solid var(--text);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0px var(--text);
+  }
+
+  .tag {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    color: #fff;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    border-radius: 20px;
+    border: 1px solid var(--text);
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+  }
+
+  .content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .shop-name {
+    margin: 25px 0 10px 0; /* タグとかぶらないように上マージン */
+    font-size: 1.2rem;
+    font-weight: 800;
+    line-height: 1.4;
+    border-bottom: 3px solid;
+    display: inline-block;
+    padding-bottom: 2px;
+  }
+
+  .user-comment {
+    background: #FFF9C4;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #444;
+    position: relative;
+    line-height: 1.5;
+  }
+  
+  .user-comment::before {
+    content: "💬";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    font-size: 1.2rem;
+  }
+
+  .info {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: auto;
+    border-top: 1px dashed #ddd;
+    padding-top: 10px;
+    line-height: 1.6;
+  }
+
+  .map-link {
+    display: block;
+    margin-top: 8px;
+    background-color: var(--text);
+    color: #fff;
+    text-align: center;
+    padding: 6px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: bold;
+    transition: opacity 0.2s;
+  }
+  
+  .map-link:hover { opacity: 0.8; }
+
+  /* カテゴリ別カラー適用 */
+  .c-super .shop-name { border-color: var(--c-super); } .c-super .tag { background: var(--c-super); }
+  .c-shop .shop-name { border-color: var(--c-shop); } .c-shop .tag { background: var(--c-shop); }
+  .c-world .shop-name { border-color: var(--c-world); } .c-world .tag { background: var(--c-world); }
+  .c-rest .shop-name { border-color: var(--c-rest); } .c-rest .tag { background: var(--c-rest); }
+  .c-pan .shop-name { border-color: var(--c-pan); } .c-pan .tag { background: var(--c-pan); color: var(--text); }
+  .c-cafe .shop-name { border-color: var(--c-cafe); } .c-cafe .tag { background: var(--c-cafe); }
+  .c-sweet .shop-name { border-color: var(--c-sweet); } .c-sweet .tag { background: var(--c-sweet); }
+  .c-sushi .shop-name { border-color: var(--c-sushi); } .c-sushi .tag { background: var(--c-sushi); }
+  .c-meat .shop-name { border-color: var(--c-meat); } .c-meat .tag { background: var(--c-meat); }
+  .c-heal .shop-name { border-color: var(--c-heal); } .c-heal .tag { background: var(--c-heal); }
+  .c-culture .shop-name { border-color: var(--c-culture); } .c-culture .tag { background: var(--c-culture); }
+
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏡 くずは民の休日MAP</h1>
+  <div class="subtitle">QOL爆上がりローカルガイド</div>
+</header>
+
+<!-- スーパー -->
+<section class="c-super">
+  <div class="section-header">
+    <div class="section-emoji">🥬</div>
+    <div>
+      <div class="section-title">スーパーのラインナップ最強説</div>
+      <div class="section-desc">マジでここだけで一生暮らせるレベル</div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="tag">スーパー</div>
+      <div class="content">
+        <div class="shop-name">トップワールド 楠葉店</div>
+        <div class="user-comment">品質・民度・雰囲気最強。ここに行けば間違いない。</div>
+        <div class="info">📍 枚方市南楠葉1-15-20<br>📝 ちょっと良いもの揃う地域の冷蔵庫</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=トップワールド+楠葉店" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">産直市場</div>
+      <div class="content">
+        <div class="shop-name">旬の駅 京都店（八幡）</div>
+        <div class="user-comment">巨大な産直市場。野菜肉魚加工品ぜんぶ強すぎて買いすぎる。</div>
+        <div class="info">📍 八幡市八幡南山76<br>📝 土日は駐車場混むけど価値あり</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=旬の駅+京都店" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">スーパー</div>
+      <div class="content">
+        <div class="shop-name">ダイエー くずはモール店</div>
+        <div class="user-comment">遅くまでやってる安心感。イオンフードスタイル。</div>
+        <div class="info">📍 くずはモール本館1F<br>📝 23時or24時まで営業は神</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=ダイエー+くずはモール店" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">デパ地下</div>
+      <div class="content">
+        <div class="shop-name">京阪百貨店 くずはモール店</div>
+        <div class="user-comment">いいもの食べたいときはここ。お惣菜もレベル高い。</div>
+        <div class="info">📍 くずはモール本館1F</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=京阪百貨店+くずはモール店" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">輸入食品</div>
+      <div class="content">
+        <div class="shop-name">カルディコーヒーファーム</div>
+        <div class="user-comment">もちろんある。コーヒーサービス復活してる？</div>
+        <div class="info">📍 くずはモール本館1F</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=カルディ+くずはモール" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">高級スーパー</div>
+      <div class="content">
+        <div class="shop-name">成城石井 くずはモール店</div>
+        <div class="user-comment">もちろんあるに決まってる。自分へのご褒美はここ。</div>
+        <div class="info">📍 くずはモール本館1F</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=成城石井+くずはモール店" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">激安</div>
+      <div class="content">
+        <div class="shop-name">サンディ 楠葉店</div>
+        <div class="user-comment">激安スーパー界隈でも最強の噂も。お菓子とか飲み物が破格。</div>
+        <div class="info">📍 枚方市楠葉野田2-31-1</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=サンディ+楠葉店" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">業務用</div>
+      <div class="content">
+        <div class="shop-name">業務スーパー 男山店</div>
+        <div class="user-comment">ちょっと遠いけど業スーレシピとかも試せる。</div>
+        <div class="info">📍 八幡市男山金振1-29</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=業務スーパー+男山店" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">激安</div>
+      <div class="content">
+        <div class="shop-name">ラ・ムー 八幡店</div>
+        <div class="user-comment">わざわざ行くかと言われたらあれやけど、あると便利。たこ焼き100円。</div>
+        <div class="info">📍 八幡市八幡柿ケ谷14-1</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=ラ・ムー+八幡店" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 買い物 -->
+<section class="c-shop">
+  <div class="section-header">
+    <div class="section-emoji">🛍️</div>
+    <div>
+      <div class="section-title">普段の買い物ができすぎる</div>
+      <div class="section-desc">梅田とか行く必要なくなったわ</div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="tag">アパレル</div>
+      <div class="content">
+        <div class="shop-name">ユニクロ / GU</div>
+        <div class="user-comment">結局ここで全部揃う説。家族の制服みたいなもん。</div>
+        <div class="info">📍 くずはモール</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=ユニクロ+くずはモール" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">雑貨</div>
+      <div class="content">
+        <div class="shop-name">無印良品</div>
+        <div class="user-comment">住めるレベルで居心地ええ。カレーとお菓子を買い込む場所。</div>
+        <div class="info">📍 くずはモール本館2F</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=無印良品+くずはモール" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">雑貨</div>
+      <div class="content">
+        <div class="shop-name">くずはロフト</div>
+        <div class="user-comment">プレゼント選びに困ったらここ。</div>
+        <div class="info">📍 くずはモール南館2F</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=くずはロフト" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">100均</div>
+      <div class="content">
+        <div class="shop-name">DAISO / Standard Products</div>
+        <div class="user-comment">高級ダイソーも併設されてて無敵。300円のやつがお洒落。</div>
+        <div class="info">📍 くずはモール南館</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Standard+Products+くずはモール" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">雑貨</div>
+      <div class="content">
+        <div class="shop-name">Day & Days</div>
+        <div class="user-comment">キッチン用品とか。「やすとものどこいこ」で常連の店。</div>
+        <div class="info">📍 くずはモール本館</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Day+and+Days+くずはモール" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">家具</div>
+      <div class="content">
+        <div class="shop-name">unico</div>
+        <div class="user-comment">おしゃれ家具だって買える！見るだけでQOL上がる気する。</div>
+        <div class="info">📍 くずはモール本館</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=unico+くずはモール" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 世界の料理 -->
+<section class="c-world">
+  <div class="section-header">
+    <div class="section-emoji">🌏</div>
+    <div>
+      <div class="section-title">世界のハイクラス料理が揃う</div>
+      <div class="section-desc">パスポートなしで世界旅行いけるで</div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="tag">タイ</div>
+      <div class="content">
+        <div class="shop-name">パパイヤタイ食堂</div>
+        <div class="user-comment">現地のええホテルで働いていたシェフ。ランチお得すぎ。</div>
+        <div class="info">📍 枚方市南楠葉1-1-35<br>📝 味はガチ本格派</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=パパイヤタイ食堂" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">ネパール</div>
+      <div class="content">
+        <div class="shop-name">ネパールキッチン クマリ</div>
+        <div class="user-comment">いろいろチーズナン食べてきたけどここが最強。カロリーは正義。</div>
+        <div class="info">📍 枚方市南楠葉1-26-2</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=ネパールキッチンクマリ" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">ベトナム</div>
+      <div class="content">
+        <div class="shop-name">ANNA KITCHEN (男山)</div>
+        <div class="user-comment">ベトナム移民が多いエリア。雰囲気まで現地仕様でビビる。</div>
+        <div class="info">📍 八幡市男山八望3-1 (中央センター)<br>📝 バインミーが美味い</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=ANNA+KITCHEN+八幡" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">アラブ</div>
+      <div class="content">
+        <div class="shop-name">SAHARA MOON (松井山手)</div>
+        <div class="user-comment">遠いけどアラブ料理が食べられる。現地風イケメン店員あり←重要。</div>
+        <div class="info">📍 京田辺市大住池ノ谷58-1</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=SAHARA+MOON+松井山手" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">南アジア</div>
+      <div class="content">
+        <div class="shop-name">Mabrur Halal Dining (八幡)</div>
+        <div class="user-comment">R1沿い。本格的な南アジア料理。ハラール対応のガチ勢。</div>
+        <div class="info">📍 八幡市下奈良蜻蛉尻6-1<br>📝 旧マブール？ジャパンの横</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Mabrur+Halal+Dining" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">ベトナム</div>
+      <div class="content">
+        <div class="shop-name">コバ・サイゴン KUZUHA支店</div>
+        <div class="user-comment">ここ以外にもガチベトナム食品店が多い。楠葉は多国籍。</div>
+        <div class="info">📍 枚方市楠葉野田1-19-11</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=コバ・サイゴン+楠葉" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">酒屋</div>
+      <div class="content">
+        <div class="shop-name">菊屋酒店</div>
+        <div class="user-comment">京都府で数軒だけの「仙禽」取扱店。品ぞろえがえぐい。</div>
+        <div class="info">📍 八幡市男山竹園2-1 A3-109</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=菊屋酒店+八幡" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- レストラン -->
+<section class="c-rest">
+  <div class="section-header">
+    <div class="section-emoji">🍽️</div>
+    <div>
+      <div class="section-title">普通のレストランもハイレベル</div>
+      <div class="section-desc">外食偏差値高め</div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="tag">洋食</div>
+      <div class="content">
+        <div class="shop-name">さくら亭 (男山)</div>
+        <div class="user-comment">ハンバーグやエビフライとか洋食美味しすぎ。肉汁ブシャァ！</div>
+        <div class="info">📍 八幡市西山和気19-9</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=さくら亭+八幡" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">うなぎ</div>
+      <div class="content">
+        <div class="shop-name">名代 鰻の清次郎</div>
+        <div class="user-comment">トップワールド向かい。営業日少ないけど近くてめちゃうま。</div>
+        <div class="info">📍 枚方市南楠葉1-3-4<br>📝 基本テイクアウト、店内は要確認</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=名代+鰻の清次郎" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">中華</div>
+      <div class="content">
+        <div class="shop-name">餃子の王将 くずは店</div>
+        <div class="user-comment">なんだかんだ最強。困ったときの王将。</div>
+        <div class="info">📍 くずはモール近く</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=餃子の王将+くずは店" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">豚まん</div>
+      <div class="content">
+        <div class="shop-name">551蓬莱 くずは京阪店</div>
+        <div class="user-comment">こちらも最強。ある時～！の匂いはテロ。</div>
+        <div class="info">📍 京阪くずは駅改札内</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=551蓬莱+京阪くずは店" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">寿司</div>
+      <div class="content">
+        <div class="shop-name">格寿し</div>
+        <div class="user-comment">いわゆる町寿司。とりあえずインスタフォローして。木金土のみ営業の幻。</div>
+        <div class="info">📍 枚方市楠葉丘1-26-16<br>📝 隠れ家すぎる名店</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=格寿し+枚方" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- パン -->
+<section class="c-pan">
+  <div class="section-header">
+    <div class="section-emoji">🥖</div>
+    <div>
+      <div class="section-title">どうせパンとか食べるんでしょ？</div>
+      <div class="section-desc">パン屋のレベルも異常に高い</div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="tag">人気店</div>
+      <div class="content">
+        <div class="shop-name">Pane e caffè porcini KUZUHA</div>
+        <div class="user-comment">福島の行列店のパンがいつでも買える！塩フォカッチャ食べて。</div>
+        <div class="info">📍 くずはモール ダイニングストリート</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=ポルチーニ+くずはモール" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">穴場</div>
+      <div class="content">
+        <div class="shop-name">ぱん工房 むかぼう</div>
+        <div class="user-comment">男山。安すぎてたぶん赤字。心配になるレベルでお得。</div>
+        <div class="info">📍 八幡市男山長沢6-1</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=ぱん工房+むかぼう" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">カレーパン</div>
+      <div class="content">
+        <div class="shop-name">グーテ くずはモール店</div>
+        <div class="user-comment">何かの金賞をとったカレーパンが美味い。</div>
+        <div class="info">📍 くずはモール本館1F</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=グーテ+くずはモール" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">本格派</div>
+      <div class="content">
+        <div class="shop-name">Boulangerie cocoro</div>
+        <div class="user-comment">魔法のレストランにも出てた。ここのパンはお洒落な味がする。</div>
+        <div class="info">📍 枚方市楠葉並木2-13-4</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Boulangerie+cocoro" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">ハード系</div>
+      <div class="content">
+        <div class="shop-name">Bread Harmony</div>
+        <div class="user-comment">「フランスへ小麦視察のため休みます」とかあるガチ勢。</div>
+        <div class="info">📍 枚方市楠葉並木2-23-6</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Bread+Harmony" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- カフェ -->
+<section class="c-cafe">
+  <div class="section-header">
+    <div class="section-emoji">☕</div>
+    <div>
+      <div class="section-title">どうせカフェとか行くんでしょ？</div>
+      <div class="section-desc">チェーンも個人店も選び放題</div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="tag">老舗</div>
+      <div class="content">
+        <div class="shop-name">Cafe 季庵 くずは本店</div>
+        <div class="user-comment">地域の古参。豆の種類が豊富。落ち着くわ～</div>
+        <div class="info">📍 枚方市楠葉朝日2-1-6</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Cafe+季庵+くずは本店" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">お洒落</div>
+      <div class="content">
+        <div class="shop-name">猿田彦珈琲</div>
+        <div class="user-comment">オープンしたて。まだ空いてる今のうちに行っとこ！</div>
+        <div class="info">📍 くずはモール本館</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=猿田彦珈琲+くずはモール" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">スタバ</div>
+      <div class="content">
+        <div class="shop-name">スターバックス</div>
+        <div class="user-comment">くずもにも2軒、美咲にもある。新作フラペチーノ難民にならなくて済む。</div>
+        <div class="info">📍 枚方市楠葉美咲3-12-11 他</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=スターバックス+くずは" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">隠れ家</div>
+      <div class="content">
+        <div class="shop-name">自家焙煎処 Comorebi</div>
+        <div class="user-comment">定年後の趣味っぽい？こだわりすぎの珈琲が安い。日曜日のみ営業！</div>
+        <div class="info">📍 八幡市八幡山路35</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=自家焙煎処+Comorebi" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">焙煎所</div>
+      <div class="content">
+        <div class="shop-name">後珈琲焙煎所</div>
+        <div class="user-comment">いろいろイベントも出てる。店主のお兄さんさわやかで推せる。</div>
+        <div class="info">📍 枚方市片鉾本町25-1</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=後珈琲焙煎所" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- スイーツ -->
+<section class="c-sweet">
+  <div class="section-header">
+    <div class="section-emoji">🍰</div>
+    <div>
+      <div class="section-title">どうせスウィーツとかも買うんでしょ？</div>
+      <div class="section-desc">お持たせも自分用も完璧</div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="tag">洋菓子</div>
+      <div class="content">
+        <div class="shop-name">ハイスタンダード</div>
+        <div class="user-comment">トップワールド向かい。小綺麗で安定して美味しい焼き菓子。</div>
+        <div class="info">📍 枚方市南楠葉1-3-12</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=ハイスタンダード+楠葉" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">名店</div>
+      <div class="content">
+        <div class="shop-name">ナチュールシロモト</div>
+        <div class="user-comment">京田辺の名店が満を持してくずもの一等地へ。シフォンケーキが神。</div>
+        <div class="info">📍 くずはモール本館1F</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=ナチュールシロモト+くずはモール" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">和菓子</div>
+      <div class="content">
+        <div class="shop-name">志ばん宗</div>
+        <div class="user-comment">八幡。ういろうが名物ですぐ売り切れるから午前中に行け！</div>
+        <div class="info">📍 八幡市八幡上津屋4</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=志ばん宗" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">定番</div>
+      <div class="content">
+        <div class="shop-name">マネケン / 御座候</div>
+        <div class="user-comment">いわずもがな。匂いに釣られて買ってしまう罠。</div>
+        <div class="info">📍 京阪くずは駅 / くずはモール</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=御座候+くずはモール" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 寿司 -->
+<section class="c-sushi">
+  <div class="section-header">
+    <div class="section-emoji">🍣</div>
+    <div>
+      <div class="section-title">回転寿司はほぼ全チェーン制覇できる</div>
+      <div class="section-desc">その日の気分で選び放題</div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="tag">人気</div>
+      <div class="content">
+        <div class="shop-name">大起水産</div>
+        <div class="user-comment">くずはモール。いつも混んでるけどネタは間違いない。</div>
+        <div class="info">📍 くずはモール</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=大起水産+くずはモール" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">定番</div>
+      <div class="content">
+        <div class="shop-name">くら寿司 / スシロー</div>
+        <div class="user-comment">八幡R1と枚方招提。ビッくらポンか、スシローカフェ部か。</div>
+        <div class="info">📍 八幡市八幡南山 / 枚方市招提北町</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=くら寿司+京都八幡" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">定番</div>
+      <div class="content">
+        <div class="shop-name">はま寿司 / かっぱ寿司</div>
+        <div class="user-comment">枚方養父と八幡。かっぱは新幹線くるから子供喜ぶ。</div>
+        <div class="info">📍 枚方市養父東町 / 八幡市八幡中ノ山</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=はま寿司+枚方養父" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">ちょっと贅沢</div>
+      <div class="content">
+        <div class="shop-name">にぎり長次郎</div>
+        <div class="user-comment">ロードサイドの贅沢寿司。落ち着いて食べたいならここ。</div>
+        <div class="info">📍 枚方市楠葉朝日2-12-5</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=にぎり長次郎+楠葉" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 肉 -->
+<section class="c-meat">
+  <div class="section-header">
+    <div class="section-emoji">🥩</div>
+    <div>
+      <div class="section-title">「肉、食うかい？」</div>
+      <div class="section-desc">ガッツリ行きたい日の最適解</div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="tag">焼肉</div>
+      <div class="content">
+        <div class="shop-name">炭火焼肉 さか元</div>
+        <div class="user-comment">駅ちか。肉屋がやっててむちゃうま。コスパもええで。</div>
+        <div class="info">📍 枚方市町楠葉1-1-15</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=炭火焼肉さか元" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">焼肉</div>
+      <div class="content">
+        <div class="shop-name">焼肉 てつ</div>
+        <div class="user-comment">仙台牛だったかな？とにかく肉質が良い。満足度高し。</div>
+        <div class="info">📍 枚方市楠葉中町1-5</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=焼肉てつ+楠葉" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">馬肉</div>
+      <div class="content">
+        <div class="shop-name">くずはホースマン</div>
+        <div class="user-comment">豊富な馬肉と店主が釣ってきた魚が充実。酒飲みには天国。</div>
+        <div class="info">📍 枚方市町楠葉1-3-5</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=くずはホースマン" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 癒し -->
+<section class="c-heal">
+  <div class="section-header">
+    <div class="section-emoji">🛁</div>
+    <div>
+      <div class="section-title">癒しスポット</div>
+      <div class="section-desc">動物と風呂は裏切らない</div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="tag">動物</div>
+      <div class="content">
+        <div class="shop-name">くずはペットセンター / ひごペット</div>
+        <div class="user-comment">図書館行くとき道沿いのケージ絶対見る。癒やし。</div>
+        <div class="info">📍 枚方市楠葉並木 / くずはモール</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=くずはペットセンター" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">うさぎ</div>
+      <div class="content">
+        <div class="shop-name">Rabbit-Ruru 枚方店</div>
+        <div class="user-comment">うさぎ専門店。店員のうさぎ愛が常軌を逸している（褒め言葉）。</div>
+        <div class="info">📍 枚方市宮之阪2-2-2</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Rabbit-Ruru+枚方" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">スパ銭</div>
+      <div class="content">
+        <div class="shop-name">極楽湯 枚方店</div>
+        <div class="user-comment">充実度と料金がまったく釣り合っていない（いい意味で）。</div>
+        <div class="info">📍 枚方市招提田近3-8-1</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=極楽湯+枚方店" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">スパ銭</div>
+      <div class="content">
+        <div class="shop-name">SPA&HOTEL 水春 松井山手</div>
+        <div class="user-comment">民度も鬼高いスパ銭。岩盤浴とマンガコーナーで1日溶ける。</div>
+        <div class="info">📍 京田辺市山手中央5-1</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=水春+松井山手" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 文化 -->
+<section class="c-culture">
+  <div class="section-header">
+    <div class="section-emoji">⛩️</div>
+    <div>
+      <div class="section-title">文化的な活動</div>
+      <div class="section-desc">たまにはインテリジェンスな休日を</div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="tag">国宝</div>
+      <div class="content">
+        <div class="shop-name">石清水八幡宮</div>
+        <div class="user-comment">ケーブルカーで登る国宝。エジソンゆかりの地。</div>
+        <div class="info">📍 八幡市八幡高坊30</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=石清水八幡宮" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">花見</div>
+      <div class="content">
+        <div class="shop-name">背割堤（淀川河川公園）</div>
+        <div class="user-comment">関西の花見行きたいスポット第1位。桜のトンネルは圧巻。</div>
+        <div class="info">📍 八幡市八幡在応寺</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=背割堤+桜" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">本屋</div>
+      <div class="content">
+        <div class="shop-name">枚方T-SITE</div>
+        <div class="user-comment">規模小さくなったけど、本棚の壁は映えスポット。1日溶ける。</div>
+        <div class="info">📍 枚方市駅前</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=枚方T-SITE" target="_blank" class="map-link">Googleマップ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
